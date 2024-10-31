@@ -1,13 +1,11 @@
-import { TypeVehicle } from "./TypeVehicle";
-import Car from "./vehicles/Car";
-import Motorcycle from "./vehicles/Motorcycle";
+import CreditCard from "./CreditCard";
+import DebitCard from "./DebitCard";
+import NubankRewards from "./NubankRewards";
 
-const type = TypeVehicle.CAR;
-let vehicle;
+// const card = new CreditCard();
+// const card = new DebitCard();
 
-if (type === TypeVehicle.CAR) {
-  vehicle = new Car("Red", 2021, 2.0, 4, 4);
+const card = new NubankRewards()
 
-}else if (type === TypeVehicle.MOTORCYCLE) {
-  vehicle = new Motorcycle("Red", 2021, 2.0);
-}
+card.validate();
+card.collectPayment();
