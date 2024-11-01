@@ -1,4 +1,4 @@
-export default interface IVehicle { 
+export default interface ILandVehicle { 
   startRoute(): void;
   getCargo(): void;
 }

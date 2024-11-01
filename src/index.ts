@@ -1,21 +1,27 @@
-import BikeTransport from "./transport/BikeTransport";
-import CarTransport from "./transport/CarTransport";
-import MotorcycleTransport from "./transport/MotorcycleTransport";
-import Transport from "./transport/Transport";
+import Client from "./vehicles/client/Client";
+import Company from "./vehicles/consts/Company";
+import ITransportFactory from "./vehicles/factories/interfaces/ITransportFactory";
+import LimeTransport from "./vehicles/factories/LimeTransport";
+import NineNineTransport from "./vehicles/factories/NineNineTransport";
+import UberTransport from "./vehicles/factories/UberTransport";
+
+const currentCompany = Company.LIME
+let factory: ITransportFactory
 
 
-let transport: Transport;
-
-if (process.argv.includes('--uber')) {
-  transport = new CarTransport();
-} else if (process.argv.includes('--log')) {
-  transport = new MotorcycleTransport();
-} else if (process.argv.includes('--bike')) { 
-  transport = new BikeTransport();
-} else {;
-  console.error('Please, select a transport type');
+switch (currentCompany) {
+  case Company.UBER:
+    factory = new UberTransport();
+    break;
+  case Company.NINENINE:
+    factory = new NineNineTransport();
+    break;
+  case Company.LIME:
+    factory = new LimeTransport();
+    break;
+  default:
+    factory = undefined;
 }
 
-if(transport) {
-  transport.startTransport();
-}
+const client = new Client(factory);
+client.startRoute();
